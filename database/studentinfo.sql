@@ -1,20 +1,20 @@
 -- phpMyAdmin SQL Dump
--- version 3.4.5
+-- version 4.5.1
 -- http://www.phpmyadmin.net
 --
--- Host: localhost
--- Generation Time: Mar 22, 2012 at 12:55 PM
--- Server version: 5.5.16
--- PHP Version: 5.3.8
+-- Host: 127.0.0.1
+-- Generation Time: Jun 04, 2018 at 08:45 AM
+-- Server version: 10.1.16-MariaDB
+-- PHP Version: 5.6.24
 
-SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
+/*!40101 SET NAMES utf8mb4 */;
 
 --
 -- Database: `studentinfo`
@@ -26,21 +26,21 @@ SET time_zone = "+00:00";
 -- Table structure for table `administrator`
 --
 
-CREATE TABLE IF NOT EXISTS `administrator` (
-  `adminid` bigint(4) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `administrator` (
+  `adminid` bigint(4) NOT NULL,
   `password` varchar(50) NOT NULL,
   `adminname` varchar(80) NOT NULL,
   `address` text NOT NULL,
-  `contactno` varchar(25) NOT NULL,
-  PRIMARY KEY (`adminid`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=124 ;
+  `contactno` varchar(25) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `administrator`
 --
 
 INSERT INTO `administrator` (`adminid`, `password`, `adminname`, `address`, `contactno`) VALUES
-(123, '83ec45960b80c035a0068df1d9df5aa8', 'ADMIN', '123 password technology', '9876543210');
+(1, 'afa939adf52ddcbd204c814afcdd754a', 'daa', 'user id 1 password daa', '09882'),
+(123, '83ec45960b80c035a0068df1d9df5aa8', 'ADMIN', '123 password admin123', '9876543210');
 
 -- --------------------------------------------------------
 
@@ -48,18 +48,15 @@ INSERT INTO `administrator` (`adminid`, `password`, `adminname`, `address`, `con
 -- Table structure for table `attendance`
 --
 
-CREATE TABLE IF NOT EXISTS `attendance` (
-  `attid` bigint(4) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `attendance` (
+  `attid` bigint(4) NOT NULL,
   `studid` varchar(20) NOT NULL,
   `subid` bigint(4) NOT NULL,
   `totalclasses` int(2) NOT NULL,
   `attendedclasses` int(2) NOT NULL,
   `percentage` double(4,2) NOT NULL,
-  `comment` text NOT NULL,
-  PRIMARY KEY (`attid`),
-  KEY `studid` (`studid`),
-  KEY `subid` (`subid`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+  `comment` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `attendance`
@@ -74,15 +71,14 @@ INSERT INTO `attendance` (`attid`, `studid`, `subid`, `totalclasses`, `attendedc
 -- Table structure for table `contact`
 --
 
-CREATE TABLE IF NOT EXISTS `contact` (
-  `contactid` bigint(4) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `contact` (
+  `contactid` bigint(4) NOT NULL,
   `name` varchar(25) NOT NULL,
   `emailid` varchar(30) NOT NULL,
   `contactno` varchar(20) NOT NULL,
   `subject` varchar(20) NOT NULL,
-  `message` text NOT NULL,
-  PRIMARY KEY (`contactid`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+  `message` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -90,13 +86,12 @@ CREATE TABLE IF NOT EXISTS `contact` (
 -- Table structure for table `course`
 --
 
-CREATE TABLE IF NOT EXISTS `course` (
-  `courseid` bigint(4) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `course` (
+  `courseid` bigint(4) NOT NULL,
   `coursename` varchar(40) NOT NULL,
   `comment` text NOT NULL,
-  `coursekey` varchar(15) NOT NULL,
-  PRIMARY KEY (`courseid`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+  `coursekey` varchar(15) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `course`
@@ -116,8 +111,8 @@ INSERT INTO `course` (`courseid`, `coursename`, `comment`, `coursekey`) VALUES
 -- Table structure for table `examination`
 --
 
-CREATE TABLE IF NOT EXISTS `examination` (
-  `examid` bigint(4) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `examination` (
+  `examid` bigint(4) NOT NULL,
   `studid` varchar(20) NOT NULL,
   `subid` bigint(4) NOT NULL,
   `courseid` bigint(4) NOT NULL,
@@ -125,12 +120,8 @@ CREATE TABLE IF NOT EXISTS `examination` (
   `maxmarks` int(2) NOT NULL,
   `scored` int(2) NOT NULL,
   `percentage` float NOT NULL,
-  `result` text NOT NULL,
-  PRIMARY KEY (`examid`),
-  KEY `subid` (`subid`),
-  KEY `studid` (`studid`),
-  KEY `courseid` (`courseid`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
+  `result` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -138,17 +129,15 @@ CREATE TABLE IF NOT EXISTS `examination` (
 -- Table structure for table `lectures`
 --
 
-CREATE TABLE IF NOT EXISTS `lectures` (
-  `lecid` bigint(4) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `lectures` (
+  `lecid` bigint(4) NOT NULL,
   `password` varchar(50) NOT NULL,
   `courseid` bigint(4) NOT NULL,
   `lecname` varchar(50) NOT NULL,
   `gender` varchar(50) NOT NULL,
   `address` varchar(100) NOT NULL,
-  `contactno` varchar(15) NOT NULL,
-  PRIMARY KEY (`lecid`),
-  KEY `courseid` (`courseid`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+  `contactno` varchar(15) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `lectures`
@@ -163,12 +152,11 @@ INSERT INTO `lectures` (`lecid`, `password`, `courseid`, `lecname`, `gender`, `a
 -- Table structure for table `semester`
 --
 
-CREATE TABLE IF NOT EXISTS `semester` (
-  `semid` bigint(4) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `semester` (
+  `semid` bigint(4) NOT NULL,
   `semester` varchar(25) NOT NULL,
-  `comment` text NOT NULL,
-  PRIMARY KEY (`semid`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+  `comment` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -176,7 +164,7 @@ CREATE TABLE IF NOT EXISTS `semester` (
 -- Table structure for table `studentdetails`
 --
 
-CREATE TABLE IF NOT EXISTS `studentdetails` (
+CREATE TABLE `studentdetails` (
   `studid` varchar(25) NOT NULL,
   `studfname` varchar(20) NOT NULL,
   `studlname` varchar(20) NOT NULL,
@@ -186,9 +174,7 @@ CREATE TABLE IF NOT EXISTS `studentdetails` (
   `contactno` varchar(20) NOT NULL,
   `courseid` bigint(4) NOT NULL,
   `semester` varchar(20) NOT NULL,
-  `dob` date NOT NULL,
-  PRIMARY KEY (`studid`),
-  KEY `courseid` (`courseid`)
+  `dob` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -204,17 +190,15 @@ INSERT INTO `studentdetails` (`studid`, `studfname`, `studlname`, `fathername`, 
 -- Table structure for table `subject`
 --
 
-CREATE TABLE IF NOT EXISTS `subject` (
-  `subid` bigint(4) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `subject` (
+  `subid` bigint(4) NOT NULL,
   `subname` varchar(20) NOT NULL,
   `courseid` bigint(4) NOT NULL,
   `lecid` bigint(4) NOT NULL,
   `subtype` varchar(25) NOT NULL,
   `semester` varchar(25) NOT NULL,
-  `comment` text NOT NULL,
-  PRIMARY KEY (`subid`),
-  KEY `courseid` (`courseid`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
+  `comment` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `subject`
@@ -224,6 +208,116 @@ INSERT INTO `subject` (`subid`, `subname`, `courseid`, `lecid`, `subtype`, `seme
 (1, 'English', 1, 0, 'Language', '1', 'fhjfbg'),
 (3, 'Accounting', 3, 0, 'Theory', '1', 'jsjk');
 
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `administrator`
+--
+ALTER TABLE `administrator`
+  ADD PRIMARY KEY (`adminid`);
+
+--
+-- Indexes for table `attendance`
+--
+ALTER TABLE `attendance`
+  ADD PRIMARY KEY (`attid`),
+  ADD KEY `studid` (`studid`),
+  ADD KEY `subid` (`subid`);
+
+--
+-- Indexes for table `contact`
+--
+ALTER TABLE `contact`
+  ADD PRIMARY KEY (`contactid`);
+
+--
+-- Indexes for table `course`
+--
+ALTER TABLE `course`
+  ADD PRIMARY KEY (`courseid`);
+
+--
+-- Indexes for table `examination`
+--
+ALTER TABLE `examination`
+  ADD PRIMARY KEY (`examid`),
+  ADD KEY `subid` (`subid`),
+  ADD KEY `studid` (`studid`),
+  ADD KEY `courseid` (`courseid`);
+
+--
+-- Indexes for table `lectures`
+--
+ALTER TABLE `lectures`
+  ADD PRIMARY KEY (`lecid`),
+  ADD KEY `courseid` (`courseid`);
+
+--
+-- Indexes for table `semester`
+--
+ALTER TABLE `semester`
+  ADD PRIMARY KEY (`semid`);
+
+--
+-- Indexes for table `studentdetails`
+--
+ALTER TABLE `studentdetails`
+  ADD PRIMARY KEY (`studid`),
+  ADD KEY `courseid` (`courseid`);
+
+--
+-- Indexes for table `subject`
+--
+ALTER TABLE `subject`
+  ADD PRIMARY KEY (`subid`),
+  ADD KEY `courseid` (`courseid`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `administrator`
+--
+ALTER TABLE `administrator`
+  MODIFY `adminid` bigint(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=124;
+--
+-- AUTO_INCREMENT for table `attendance`
+--
+ALTER TABLE `attendance`
+  MODIFY `attid` bigint(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+--
+-- AUTO_INCREMENT for table `contact`
+--
+ALTER TABLE `contact`
+  MODIFY `contactid` bigint(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT for table `course`
+--
+ALTER TABLE `course`
+  MODIFY `courseid` bigint(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+--
+-- AUTO_INCREMENT for table `examination`
+--
+ALTER TABLE `examination`
+  MODIFY `examid` bigint(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+--
+-- AUTO_INCREMENT for table `lectures`
+--
+ALTER TABLE `lectures`
+  MODIFY `lecid` bigint(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT for table `semester`
+--
+ALTER TABLE `semester`
+  MODIFY `semid` bigint(4) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `subject`
+--
+ALTER TABLE `subject`
+  MODIFY `subid` bigint(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- Constraints for dumped tables
 --
