@@ -1,0 +1,6 @@
+#Project Name : Student Information System
+ 
+Front End : PHP
+ 
+Back End : MYSQL
+This is Student Information System script. Here all the records of the students are saved in student information system. Every semesters marks and results are also saved in mysql database. Since this is a online project. parents can view the marks of the student through online. Calculation of the percentage grade are all done automatically using this software. Even here the users can see the courses available , sections, teachers and other information. since this software is online, people can search just sitting at home. Students can't hide their marks or results from their parents.
